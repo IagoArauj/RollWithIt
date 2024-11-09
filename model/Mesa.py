@@ -1,5 +1,11 @@
+from model.Monstro import Monstro
+from model.Personagem import Personagem
+from model.Usuario import Usuario
+
+
 class Mesa:
-    def __init__(self, uid, nome, personagens, descricao, uid_master, monstros=None):
+    def __init__(self, uid: int, nome: str, personagens: list[Personagem], descricao: str, mestre: Usuario,
+                 monstros: list[Monstro] = None):
         if monstros is None:
             monstros = []
 
@@ -7,7 +13,7 @@ class Mesa:
         self.nome = nome
         self.personagens = personagens
         self.descricao = descricao
-        self.uid_master = uid_master
+        self.mestre = mestre
         self.monstros = monstros
 
     def __str__(self):
