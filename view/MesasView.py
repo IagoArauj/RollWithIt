@@ -4,10 +4,11 @@ import ttkbootstrap as ttk
 from ttkbootstrap.constants import *
 from ttkbootstrap.dialogs import Messagebox
 
+import view.LoginView
 from controller.MesaController import MesaController
 
 
-class Mesas(ttk.Frame):
+class MesasView(ttk.Frame):
     def __init__(self, janela, muda_pagina):
         super().__init__(janela)
         self.usuario = janela.curr_usuario
@@ -24,7 +25,11 @@ class Mesas(ttk.Frame):
         menu.add_command(label="Jogador", command=lambda: print("Jogador"))
         menu_adicionar_btn["menu"] = menu
 
-        ttk.Button(header, text="Sair", style=DANGER).pack(fill=X, side=RIGHT)
+        def sair():
+            janela.curr_usuario = None
+            self.muda_pagina(view.LoginView.LoginView)
+
+        ttk.Button(header, text="Sair", style=DANGER, command=sair).pack(fill=X, side=RIGHT)
         ttk.Label(header, text="Mesas", font=("Helvetica", 20)).pack(side=LEFT)
 
         ttk.Separator(self).pack(fill=X, pady=10)
@@ -74,6 +79,10 @@ class Mesas(ttk.Frame):
             for i, mesa in enumerate(mesas_jogador):
                 self.mostra_mesa_jogador(mesas_jogador.mesa, mesas_jogador.jogador, i + 1)
 
+    def exclui_mesa(self, mesa):
+        MesaController().remover(mesa.uid, self.usuario.uid)
+        self.muda_pagina(MesasView)
+
     def mostra_mesa(self, mesa, i):
         frame_mesas = ttk.Frame(self)
         frame_mesas.pack(expand=True, fill=X, pady=10)
@@ -89,7 +98,7 @@ class Mesas(ttk.Frame):
         menu_btn.grid(row=i, column=3, sticky=W + E)
         menu = ttk.Menu(menu_btn, tearoff=0)
         menu.add_command(label="Editar", command=lambda: print("Editar"))
-        menu.add_command(label="Deletar", command=lambda: print("Deletar"))
+        menu.add_command(label="Deletar", command=lambda: self.exclui_mesa(mesa))
         menu_btn["menu"] = menu
 
     def mostra_mesa_jogador(self, mesa, jogador, i):
@@ -107,7 +116,8 @@ class Mesas(ttk.Frame):
         menu_btn.grid(row=i, column=3, sticky=W + E)
         menu = ttk.Menu(menu_btn, tearoff=0)
         menu.add_command(label="Editar", command=lambda: print("Editar"))
-        menu.add_command(label="Deletar", command=lambda: print("Deletar"))
+        menu.add_command(label="Deletar",
+                         command=lambda: self.exclui_mesa(mesa))
         menu_btn["menu"] = menu
 
     def add_mesa_window(self):
@@ -132,9 +142,9 @@ class Mesas(ttk.Frame):
         ttk.Label(frame, text="").pack(pady=2)
 
         def add():
-            mesa = MesaController().cadastrar(nome_entry.get(), descricao_entry.get(), self.usuario.uid)
+            mesa = MesaController().cadastrar(nome_entry.get(), descricao_entry.get(), self.usuario)
             if mesa is not None:
-                self.muda_pagina(Mesas)
+                self.muda_pagina(MesasView)
                 window.destroy()
             else:
                 Messagebox.show_error("Erro ao adicionar mesa")

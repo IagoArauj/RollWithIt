@@ -4,7 +4,11 @@ from infra.db import usuarios
 
 
 class UsuarioController:
-    def cadastrar(self, usuario: Usuario) -> Usuario:
+    def cadastrar(self, login, senha, nome) -> Usuario or None:
+        if self.get_usuario_by_login(login) is not None:
+            return None
+
+        usuario = Usuario(len(usuarios) + 1, nome, login, senha)
         usuarios.append(usuario)
         return usuarios[-1]
 
@@ -25,3 +29,9 @@ class UsuarioController:
     def get_usuarios(self) -> list[Usuario]:
         return usuarios
 
+    def get_usuario_by_login(self, login: str) -> Usuario or None:
+        for usuario in usuarios:
+            if usuario.login == login:
+                return usuario
+
+        return None

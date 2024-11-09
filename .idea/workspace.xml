@@ -5,26 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="62ee2235-6bd8-40e8-8240-3c64f9f3df06" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/RollWithIt.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Programa.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/controller/MesaController.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/controller/UsuarioController.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/controller/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/infra/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/infra/db.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/model/Mesa.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/model/Monstro.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/model/Personagem.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/model/Usuario.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/model/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/view/LoginView.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/view/MesasView.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/view/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/view/CadastroView.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Programa.py" beforeDir="false" afterPath="$PROJECT_DIR$/Programa.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/MesaController.py" beforeDir="false" afterPath="$PROJECT_DIR$/controller/MesaController.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/UsuarioController.py" beforeDir="false" afterPath="$PROJECT_DIR$/controller/UsuarioController.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/LoginView.py" beforeDir="false" afterPath="$PROJECT_DIR$/view/LoginView.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/MesasView.py" beforeDir="false" afterPath="$PROJECT_DIR$/view/MesasView.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -122,8 +109,31 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="origin/main" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/RollWithIt$Login.coverage" NAME="Login Coverage Results" MODIFIED="1731118709178" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/view" />
-    <SUITE FILE_PATH="coverage/RollWithIt$Programa.coverage" NAME="Programa Coverage Results" MODIFIED="1731187330686" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/RollWithIt$Programa.coverage" NAME="Programa Coverage Results" MODIFIED="1731194520279" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

@@ -3,11 +3,11 @@ from ttkbootstrap.constants import *
 
 import tkinter as tk
 
-from view.LoginView import Login
+from view.LoginView import LoginView
 
 
 class Programa(ttk.Window):
-    page_list = [Login]
+    page_list = [LoginView]
     curr_page: ttk.Frame = None
     curr_usuario = None
 
@@ -16,7 +16,7 @@ class Programa(ttk.Window):
         self.title("RollWithIt")
         self.geometry("800x600")
 
-        self.muda_pagina(Login)
+        self.muda_pagina(LoginView)
 
     def muda_pagina(self, frame):
         new_page = frame(self, self.muda_pagina)

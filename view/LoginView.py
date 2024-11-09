@@ -2,16 +2,18 @@ import ttkbootstrap as ttk
 from ttkbootstrap.constants import *
 from ttkbootstrap.dialogs import Messagebox
 
+import view.CadastroView
 from controller.UsuarioController import UsuarioController
-from view.MesasView import Mesas
+from view.MesasView import MesasView
 
 
-class Login(ttk.Frame):
+class LoginView(ttk.Frame):
     def realiza_login(self, login, senha):
         usuario = UsuarioController().logar(login, senha)
+        print(f'Usuario encontrado: {usuario.uid} | {usuario.nome} | {usuario.login} | {usuario.senha}')
         if usuario is not None:
             self.master.curr_usuario = usuario
-            self.muda_pagina(Mesas)
+            self.muda_pagina(MesasView)
         else:
             Messagebox.show_error("Usuário ou senha inválidos")
 
@@ -41,5 +43,5 @@ class Login(ttk.Frame):
 
         ttk.Label(self).pack(pady=2)
 
-        ttk.Button(self, text="Cadastrar", style=PRIMARY).pack(fill=X)
+        ttk.Button(self, text="Cadastrar", style=PRIMARY, command=lambda: muda_pagina(view.CadastroView.CadastroView)).pack(fill=X)
         self.tkraise()
