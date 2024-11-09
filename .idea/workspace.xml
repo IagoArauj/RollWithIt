@@ -4,14 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="62ee2235-6bd8-40e8-8240-3c64f9f3df06" name="Changes" comment="Código com todas as classes menos as visualizações prontas">
+    <list default="true" id="62ee2235-6bd8-40e8-8240-3c64f9f3df06" name="Changes" comment="Tipagem">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controller/MesaController.py" beforeDir="false" afterPath="$PROJECT_DIR$/controller/MesaController.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controller/UsuarioController.py" beforeDir="false" afterPath="$PROJECT_DIR$/controller/UsuarioController.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/Mesa.py" beforeDir="false" afterPath="$PROJECT_DIR$/model/Mesa.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/Monstro.py" beforeDir="false" afterPath="$PROJECT_DIR$/model/Monstro.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/Personagem.py" beforeDir="false" afterPath="$PROJECT_DIR$/model/Personagem.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/Usuario.py" beforeDir="false" afterPath="$PROJECT_DIR$/model/Usuario.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -114,7 +109,7 @@
       <updated>1731111328448</updated>
       <workItem from="1731111341439" duration="306000" />
       <workItem from="1731111668277" duration="10661000" />
-      <workItem from="1731182336604" duration="8590000" />
+      <workItem from="1731182336604" duration="9555000" />
     </task>
     <task id="LOCAL-00001" summary="Código com todas as classes menos as visualizações prontas">
       <option name="closed" value="true" />
@@ -124,7 +119,23 @@
       <option name="project" value="LOCAL" />
       <updated>1731187643627</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Tipagem">
+      <option name="closed" value="true" />
+      <created>1731191146006</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1731191146006</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Tipagem">
+      <option name="closed" value="true" />
+      <created>1731191200785</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1731191200785</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -132,7 +143,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Código com todas as classes menos as visualizações prontas" />
-    <option name="LAST_COMMIT_MESSAGE" value="Código com todas as classes menos as visualizações prontas" />
+    <MESSAGE value="Tipagem" />
+    <option name="LAST_COMMIT_MESSAGE" value="Tipagem" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/RollWithIt$Login.coverage" NAME="Login Coverage Results" MODIFIED="1731118709178" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/view" />

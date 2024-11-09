@@ -2,11 +2,12 @@ from infra.db import mesas
 from model.Mesa import Mesa
 from model.Monstro import Monstro
 from model.Personagem import Personagem
+from model.Usuario import Usuario
 
 
 class MesaController:
-    def cadastrar(self, nome: str, descricao: str, uid_master: int) -> Mesa:
-        mesas.append(Mesa(len(mesas) + 1, nome, [], descricao, uid_master))
+    def cadastrar(self, nome: str, descricao: str, mestre: Usuario) -> Mesa:
+        mesas.append(Mesa(len(mesas) + 1, nome, [], descricao, mestre))
         return mesas[-1]
 
     def get_mesas(self) -> list[Mesa]:
@@ -28,13 +29,13 @@ class MesaController:
 
         return mesas_usuario
 
-    def get_mesas_jogador(self, uid_usuario: int) -> list[Mesa]:
+    def get_mesas_jogador(self, uid_usuario: int) -> list[dict[str, Mesa|Personagem]]:
         mesas_usuario = []
 
         for mesa in mesas:
             for personagem in mesa.personagens:
                 if personagem.usuario.uid == uid_usuario:
-                    mesas_usuario.append({mesa: mesa, personagem: personagem})
+                    mesas_usuario.append({"mesa": mesa, "personagem": personagem})
 
         return mesas_usuario
 
