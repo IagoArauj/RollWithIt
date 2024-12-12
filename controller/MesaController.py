@@ -1,4 +1,3 @@
-from infra.db import mesas
 from model.Mesa import Mesa
 from model.Monstro import Monstro
 from model.Personagem import Personagem
@@ -6,87 +5,87 @@ from model.Usuario import Usuario
 
 
 class MesaController:
-    def cadastrar(self, nome: str, descição: str, mestre: Usuario) -> Mesa:
-        mesas.append(Mesa(len(mesas) + 1, nome, [], descição, mestre))
-        return mesas[-1]
+    @staticmethod
+    def cadastrar(nome: str, descição: str, mestre: Usuario) -> Mesa:
+        mesa = Mesa(nome=nome, descricao=descição, mestre=mestre, personagens=[])
+        mesa.create()
+        return mesa
 
-    def get_mesas(self) -> list[Mesa]:
-        return mesas
+    @staticmethod
+    def get_mesas() -> list[Mesa]:
+        return Mesa.get_all()
 
-    def get_mesa(self, uid: int) -> Mesa or None:
-        for mesa in mesas:
-            if mesa.uid == uid:
-                return mesa
+    @staticmethod
+    def get_mesa(uid: int) -> Mesa or None:
+        return Mesa.get_by_uid(uid)
 
-        return None
+    @staticmethod
+    def get_mesas_mestre(uid_usuario: int) -> list[Mesa]:
+        return Mesa.get_by_mestre(uid_usuario)
 
-    def get_mesas_mestre(self, uid_usuario: int) -> list[Mesa]:
-        mesas_usuario = []
+    @staticmethod
+    def get_mesas_jogador(uid_usuario: int) -> list[dict[str, Mesa|Personagem]]:
+        return Mesa.get_by_jogador(uid_usuario)
 
-        for mesa in mesas:
-            if mesa.mestre.uid == uid_usuario:
-                mesas_usuario.append(mesa)
+    @staticmethod
+    def remover(uid: int, uid_usuario: int) -> bool:
+        mesa = Mesa.get_by_uid(uid)
+        if mesa is not None and mesa.mestre.uid == uid_usuario:
+            mesa.delete()
+            return True
 
-        return mesas_usuario
+        return False
 
-    def get_mesas_jogador(self, uid_usuario: int) -> list[dict[str, Mesa|Personagem]]:
-        mesas_usuario = []
+    @staticmethod
+    def adicionar_personagem(uid_mesa: int, personagem: Personagem) -> bool:
+        mesa = Mesa.get_by_uid(uid_mesa)
 
-        for mesa in mesas:
+        if mesa is not None:
+            mesa.personagens.append(personagem)
+            mesa.update()
+            return True
+
+        return False
+
+    @staticmethod
+    def remover_personagem(uid_mesa: int, uid_personagem: int, uid_usuario: int) -> bool:
+        mesa = Mesa.get_by_uid(uid_mesa)
+        if mesa is not None and mesa.mestre.uid == uid_usuario:
             for personagem in mesa.personagens:
-                if personagem.usuario.uid == uid_usuario:
-                    mesas_usuario.append({"mesa": mesa, "personagem": personagem})
-
-        return mesas_usuario
-
-    def remover(self, uid: int, uid_usuario: int) -> bool:
-        for mesa in mesas:
-            if mesa.uid == uid and mesa.mestre.uid == uid_usuario:
-                mesas.remove(mesa)
-                return True
+                if personagem.uid == uid_personagem:
+                    mesa.personagens.remove(personagem)
+                    mesa.update()
+                    return True
 
         return False
 
-    def adicionar_personagem(self, uid_mesa: int, personagem: Personagem) -> bool:
-        for mesa in mesas:
-            if mesa.uid == uid_mesa:
-                mesa.personagens.append(personagem)
-                return True
+    @staticmethod
+    def adicionar_monstro(uid_mesa: int, monstro: Monstro) -> bool:
+        mesa = Mesa.get_by_uid(uid_mesa)
+        if mesa is not None:
+            mesa.monstros.append(monstro)
+            mesa.update()
+            return True
 
         return False
 
-    def remover_personagem(self, uid_mesa: int, uid_personagem: int, uid_usuario: int) -> bool:
-        for mesa in mesas:
-            if mesa.uid == uid_mesa and mesa.mestre.uid == uid_usuario:
-                for personagem in mesa.personagens:
-                    if personagem.uid == uid_personagem:
-                        mesa.personagens.remove(personagem)
-                        return True
+    @staticmethod
+    def remover_monstro(uid_mesa, uid_monstro, uid_usuario):
+        mesa = Mesa.get_by_uid(uid_mesa)
+        if mesa is not None and mesa.mestre.uid == uid_usuario:
+            for monstro in mesa.monstros:
+                if monstro.uid == uid_monstro:
+                    mesa.monstros.remove(monstro)
+                    mesa.update()
+                    return True
 
         return False
 
-    def adicionar_monstro(self, uid_mesa: int, monstro: Monstro) -> bool:
-        for mesa in mesas:
-            if mesa.uid == uid_mesa:
-                mesa.monstros.append(monstro)
-                return True
+    @staticmethod
+    def get_monstros(uid_mesa):
+        mesa = Mesa.get_by_uid(uid_mesa)
+        if mesa is not None:
+            return mesa.monstros
 
-        return False
-
-    def remover_monstro(self, uid_mesa, uid_monstro, uid_usuario):
-        for mesa in mesas:
-            if mesa.uid == uid_mesa and mesa.mestre.uid == uid_usuario:
-                for monstro in mesa.monstros:
-                    if monstro.uid == uid_monstro:
-                        mesa.monstros.remove(monstro)
-                        return True
-
-        return False
-
-    def get_monstros(self, uid_mesa):
-        for mesa in mesas:
-            if mesa.uid == uid_mesa:
-                return mesa.monstros
-
-        return None
+        return []
 

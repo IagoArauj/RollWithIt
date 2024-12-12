@@ -1,10 +1,7 @@
 import ttkbootstrap as ttk
-from ttkbootstrap.constants import *
-
-import tkinter as tk
 
 from view.LoginView import LoginView
-
+from infra.config import data
 
 class Programa(ttk.Window):
     page_list = [LoginView]
@@ -28,4 +25,5 @@ class Programa(ttk.Window):
 
 if __name__ == "__main__":
     app = Programa()
+    data['app'] = app
     app.mainloop()

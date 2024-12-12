@@ -10,7 +10,7 @@ from view.MesasView import MesasView
 class LoginView(ttk.Frame):
     def realiza_login(self, login, senha):
         usuario = UsuarioController().logar(login, senha)
-        print(f'Usuario encontrado: {usuario.uid} | {usuario.nome} | {usuario.login} | {usuario.senha}')
+
         if usuario is not None:
             self.master.curr_usuario = usuario
             self.muda_pagina(MesasView)

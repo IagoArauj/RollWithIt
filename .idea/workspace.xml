@@ -4,12 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="62ee2235-6bd8-40e8-8240-3c64f9f3df06" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/view/CadastroView.py" afterDir="false" />
+    <list default="true" id="62ee2235-6bd8-40e8-8240-3c64f9f3df06" name="Changes" comment="[ADD] cadastro de mesas e usuarios">
+      <change afterPath="$PROJECT_DIR$/infra/config.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/infra/db.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/view/MesaView.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Programa.py" beforeDir="false" afterPath="$PROJECT_DIR$/Programa.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controller/MesaController.py" beforeDir="false" afterPath="$PROJECT_DIR$/controller/MesaController.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controller/UsuarioController.py" beforeDir="false" afterPath="$PROJECT_DIR$/controller/UsuarioController.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/infra/db.py" beforeDir="false" afterPath="$PROJECT_DIR$/infra/db.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/Mesa.py" beforeDir="false" afterPath="$PROJECT_DIR$/model/Mesa.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/Monstro.py" beforeDir="false" afterPath="$PROJECT_DIR$/model/Monstro.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/Personagem.py" beforeDir="false" afterPath="$PROJECT_DIR$/model/Personagem.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/Usuario.py" beforeDir="false" afterPath="$PROJECT_DIR$/model/Usuario.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/view/LoginView.py" beforeDir="false" afterPath="$PROJECT_DIR$/view/LoginView.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/view/MesasView.py" beforeDir="false" afterPath="$PROJECT_DIR$/view/MesasView.py" afterDir="false" />
     </list>
@@ -28,6 +35,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;IagoArauj&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/IagoArauj/RollWithIt&quot;,
+    &quot;accountId&quot;: &quot;2fb7c248-fa6e-485b-af7d-a3a867261b9e&quot;
+  }
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 3
 }</component>
@@ -45,6 +64,7 @@
     &quot;Python.Programa.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -87,8 +107,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-PY-242.23726.102" />
-        <option value="bundled-python-sdk-5e1850174b45-399fe30bd8c1-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-242.23726.102" />
+        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-PY-242.24807.21" />
+        <option value="bundled-python-sdk-00717045f1d3-399fe30bd8c1-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-242.24807.21" />
       </set>
     </attachedChunks>
   </component>
@@ -103,7 +123,21 @@
       <workItem from="1731111341439" duration="306000" />
       <workItem from="1731111668277" duration="10661000" />
       <workItem from="1731182336604" duration="5051000" />
+      <workItem from="1731370691545" duration="124000" />
+      <workItem from="1731417333405" duration="1622000" />
+      <workItem from="1733836534222" duration="7665000" />
+      <workItem from="1733938059144" duration="644000" />
+      <workItem from="1733939337976" duration="18911000" />
     </task>
+    <task id="LOCAL-00001" summary="[ADD] cadastro de mesas e usuarios">
+      <option name="closed" value="true" />
+      <created>1731195123621</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1731195123621</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -132,8 +166,12 @@
       </map>
     </option>
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="[ADD] cadastro de mesas e usuarios" />
+    <option name="LAST_COMMIT_MESSAGE" value="[ADD] cadastro de mesas e usuarios" />
+  </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/RollWithIt$Login.coverage" NAME="Login Coverage Results" MODIFIED="1731118709178" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/view" />
-    <SUITE FILE_PATH="coverage/RollWithIt$Programa.coverage" NAME="Programa Coverage Results" MODIFIED="1731194520279" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/RollWithIt$Programa.coverage" NAME="Programa Coverage Results" MODIFIED="1733962102017" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

@@ -1,12 +1,11 @@
-from ensurepip import bootstrap
-
+from infra.config import data
 import ttkbootstrap as ttk
 from ttkbootstrap.constants import *
 from ttkbootstrap.dialogs import Messagebox
 
 import view.LoginView
 from controller.MesaController import MesaController
-
+from view.MesaView import MesaView
 
 class MesasView(ttk.Frame):
     def __init__(self, janela, muda_pagina):
@@ -97,7 +96,12 @@ class MesasView(ttk.Frame):
         menu_btn = ttk.Menubutton(frame_mesas, text="Gerenciar", style=PRIMARY)
         menu_btn.grid(row=i, column=3, sticky=W + E)
         menu = ttk.Menu(menu_btn, tearoff=0)
-        menu.add_command(label="Editar", command=lambda: print("Editar"))
+
+        def ver_mesa_setup():
+            data["mesa"] = mesa
+            self.muda_pagina(MesaView)
+
+        menu.add_command(label="Ver Mesa", command=ver_mesa_setup)
         menu.add_command(label="Deletar", command=lambda: self.exclui_mesa(mesa))
         menu_btn["menu"] = menu
 
@@ -112,10 +116,16 @@ class MesasView(ttk.Frame):
         ttk.Label(frame_mesas, text=mesa.uid).grid(row=i, column=0, sticky=W + E)
         ttk.Label(frame_mesas, text=mesa.nome).grid(row=i, column=1, sticky=W + E)
         ttk.Label(frame_mesas, text=jogador.nome).grid(row=i, column=2, sticky=W + E)
+
         menu_btn = ttk.Menubutton(frame_mesas, text="Gerenciar", style=PRIMARY)
         menu_btn.grid(row=i, column=3, sticky=W + E)
         menu = ttk.Menu(menu_btn, tearoff=0)
-        menu.add_command(label="Editar", command=lambda: print("Editar"))
+
+        def ver_mesa_setup():
+            data["mesa"] = mesa
+            self.muda_pagina(MesaView)
+
+        menu.add_command(label="Ver Mesa", command=ver_mesa_setup)
         menu.add_command(label="Deletar",
                          command=lambda: self.exclui_mesa(mesa))
         menu_btn["menu"] = menu
