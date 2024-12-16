@@ -25,7 +25,14 @@ class MesaController:
 
     @staticmethod
     def get_mesas_jogador(uid_usuario: int) -> list[dict[str, Mesa|Personagem]]:
-        return Mesa.get_by_jogador(uid_usuario)
+        mesas = Mesa.get_all()
+        mesas_jogador = []
+        for mesa in mesas:
+            for personagem in mesa.personagens:
+                if personagem.usuario.uid == uid_usuario:
+                    mesas_jogador.append({'mesa': mesa, 'personagem': personagem})
+
+        return mesas_jogador
 
     @staticmethod
     def remover(uid: int, uid_usuario: int) -> bool:
@@ -37,10 +44,18 @@ class MesaController:
         return False
 
     @staticmethod
-    def adicionar_personagem(uid_mesa: int, personagem: Personagem) -> bool:
+    def adicionar_personagem(uid_mesa: int|str, personagem: Personagem) -> bool:
+        if not isinstance(uid_mesa, int):
+            try:
+                uid_mesa = int(uid_mesa)
+            except ValueError:
+                return False
+
         mesa = Mesa.get_by_uid(uid_mesa)
 
         if mesa is not None:
+            if personagem.uid <= 0:
+                personagem.uid = len(mesa.personagens) + 1
             mesa.personagens.append(personagem)
             mesa.update()
             return True
@@ -50,10 +65,22 @@ class MesaController:
     @staticmethod
     def remover_personagem(uid_mesa: int, uid_personagem: int, uid_usuario: int) -> bool:
         mesa = Mesa.get_by_uid(uid_mesa)
-        if mesa is not None and mesa.mestre.uid == uid_usuario:
+        if mesa is not None:
             for personagem in mesa.personagens:
-                if personagem.uid == uid_personagem:
+                if personagem.uid == uid_personagem or mesa.mestre.uid == uid_usuario:
                     mesa.personagens.remove(personagem)
+                    mesa.update()
+                    return True
+
+        return False
+
+    @staticmethod
+    def atualizar_personagem(uid_mesa: int, personagem: Personagem) -> bool:
+        mesa = Mesa.get_by_uid(uid_mesa)
+        if mesa is not None:
+            for i, p in enumerate(mesa.personagens):
+                if p.uid == personagem.uid:
+                    mesa.personagens[i] = personagem
                     mesa.update()
                     return True
 
@@ -88,4 +115,16 @@ class MesaController:
             return mesa.monstros
 
         return []
+
+    @staticmethod
+    def atualizar_monstro(uid_mesa: int, monstro: Monstro) -> bool:
+        mesa = Mesa.get_by_uid(uid_mesa)
+        if mesa is not None:
+            for i, m in enumerate(mesa.monstros):
+                if m.uid == monstro.uid:
+                    mesa.monstros[i] = monstro
+                    mesa.update()
+                    return True
+
+        return False
 
