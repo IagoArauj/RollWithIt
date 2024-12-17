@@ -10,6 +10,8 @@ from model.Personagem import Personagem
 from view.MesaView import MesaView
 
 class MesasView(ttk.Frame):
+    personagem_atual: Personagem = None
+
     def __init__(self, janela, muda_pagina):
         super().__init__(janela)
         self.usuario = janela.curr_usuario
@@ -38,25 +40,28 @@ class MesasView(ttk.Frame):
         ttk.Label(self, text="Mesas que você é mestre", font=('Helvetica', 14)).pack(pady=10)
 
         cols = ["UID", "Nome", "Descrição", "Ações"]
-        cols_jogador = ["UID", "Nome da Mesa", "Nome Personagem", "Ações"]
+        cols_jogador = ["UID da Mesa", "Nome da Mesa", "Nome Personagem", "Ações"]
 
         mesas_mestre = MesaController().get_mesas_mestre(janela.curr_usuario.uid)
 
         if len(mesas_mestre) == 0:
             ttk.Label(self, text="Você não é mestre de nenhuma mesa").pack()
         else:
-            frame_mesas_header = ttk.Frame(self, bootstyle="secondary")
-            frame_mesas_header.pack(expand=True, fill=X, pady=10)
-            frame_mesas_header.grid_columnconfigure(0, weight=1)
-            frame_mesas_header.grid_columnconfigure(1, weight=1)
-            frame_mesas_header.grid_columnconfigure(2, weight=1)
-            frame_mesas_header.grid_columnconfigure(3, weight=1)
+            frame_mesas = ttk.Frame(self)
+            frame_mesas.pack(expand=True, fill=X, pady=10)
+            frame_mesas.grid_columnconfigure(0, weight=1)
+            frame_mesas.grid_columnconfigure(1, weight=1)
+            frame_mesas.grid_columnconfigure(2, weight=1)
+            frame_mesas.grid_columnconfigure(3, weight=1)
 
             for i, col in enumerate(cols):
-                ttk.Label(frame_mesas_header, text=col).grid(row=0, column=i, sticky=W + E)
+                ttk.Label(frame_mesas, text=col).grid(row=0, column=i, sticky=W + E)
 
-            for i, mesa in enumerate(mesas_mestre):
-                self.mostra_mesa(mesa, i + 1)
+            i = 0
+            for mesa in mesas_mestre:
+                self.mostra_mesa(mesa, i + 1, frame_mesas)
+                ttk.Frame(frame_mesas, height=3).grid(row=i + 2, column=0, columnspan=4, sticky=W + E)
+                i += 2
 
         ttk.Separator(self).pack(fill=X, pady=10)
 
@@ -78,24 +83,17 @@ class MesasView(ttk.Frame):
                 ttk.Label(frame_mesas, text=col).grid(row=0, column=i, sticky=W + E)
 
             i = 0
-            while i < len(mesas_jogador):
-                mesa = mesas_jogador[i]
+            for mesa in mesas_jogador:
                 self.mostra_mesa_jogador(mesa['mesa'], mesa['personagem'], i + 1, frame_mesas)
                 ttk.Frame(frame_mesas, height=3).grid(row=i + 2, column=0, columnspan=4, sticky=W + E)
                 i += 2
 
     def exclui_mesa(self, mesa):
-        MesaController().remover(mesa.uid, self.usuario.uid)
-        self.muda_pagina(MesasView)
+        if tkMessageBox.askyesno("Excluir Mesa", "Deseja realmente excluir a mesa?"):
+            MesaController().remover(mesa.uid, self.usuario.uid)
+            self.muda_pagina(MesasView)
 
-    def mostra_mesa(self, mesa, i):
-        frame_mesas = ttk.Frame(self)
-        frame_mesas.pack(expand=True, fill=X, pady=10)
-        frame_mesas.grid_columnconfigure(0, weight=1)
-        frame_mesas.grid_columnconfigure(1, weight=1)
-        frame_mesas.grid_columnconfigure(2, weight=2)
-        frame_mesas.grid_columnconfigure(3, weight=1)
-
+    def mostra_mesa(self, mesa, i, frame_mesas):
         ttk.Label(frame_mesas, text=mesa.uid).grid(row=i, column=0, sticky=W + E)
         ttk.Label(frame_mesas, text=mesa.nome).grid(row=i, column=1, sticky=W + E)
         ttk.Label(frame_mesas, text=mesa.descricao).grid(row=i, column=2, sticky=W + E)
@@ -116,8 +114,23 @@ class MesasView(ttk.Frame):
         ttk.Label(frame_mesas, text=mesa.nome).grid(row=i, column=1, sticky=W + E)
         ttk.Label(frame_mesas, text=personagem.nome).grid(row=i, column=2, sticky=W + E)
 
-        ttk.Button(frame_mesas, text="Excluir Personagem", style=DANGER,
-                   command=lambda: self.remover_personagem(mesa, personagem)).grid(row=i, column=3, sticky=W + E)
+        frame_buttons = ttk.Frame(frame_mesas)
+        frame_buttons.grid_columnconfigure(0, weight=1)
+        frame_buttons.grid_columnconfigure(1, weight=1)
+        frame_buttons.grid(row=i, column=3, sticky=W + E)
+
+        ttk.Button(frame_buttons, text="Excluir Personagem", style=DANGER,
+                   command=lambda: self.remover_personagem(mesa, personagem)
+                   ).grid(row=i, column=1, sticky=W + E, padx=5)
+
+        def ver_personagem(mesa, personagem):
+            data["mesa"] = mesa
+            self.personagem_atual = personagem
+            self.add_jogador_window()
+
+        ttk.Button(frame_buttons, text="Ver Personagem", style=PRIMARY,
+                   command=lambda: ver_personagem(mesa, personagem)
+                   ).grid(row=i, column=0, sticky=W + E, padx=5)
 
     def remover_personagem(self, mesa, personagem):
         if tkMessageBox.askyesno("Remover Personagem", "Deseja realmente remover o personagem?"):
@@ -170,35 +183,54 @@ class MesasView(ttk.Frame):
         frame = ttk.Frame(window)
         frame.pack(expand=True, fill=X, pady=10, padx=10)
 
-        ttk.Label(frame, text="UID da Mesa").pack()
-        uid_mesa = ttk.Entry(frame)
-        uid_mesa.pack(fill=X)
+        if self.personagem_atual is None:
+            ttk.Label(frame, text="UID da Mesa").pack()
+            uid_mesa = ttk.Entry(frame)
+            uid_mesa.pack(fill=X)
 
         ttk.Label(frame, text="Nome").pack(pady=10)
         nome = ttk.Entry(frame)
+        nome.insert(0, self.personagem_atual.nome if self.personagem_atual else "")
         nome.pack(fill=X)
 
         ttk.Label(frame, text="Raça").pack(pady=10)
         raca = ttk.Entry(frame)
+        raca.insert(0, self.personagem_atual.raca if self.personagem_atual else "")
         raca.pack(fill=X)
 
         ttk.Label(frame, text="Classe").pack(pady=10)
         classe = ttk.Entry(frame)
+        classe.insert(0, self.personagem_atual.classe if self.personagem_atual else "")
         classe.pack(fill=X)
 
         ttk.Label(frame, text="Vida (HP)").pack(pady=10)
         vida = ttk.Entry(frame)
+        vida.insert(0, self.personagem_atual.vida if self.personagem_atual else "")
         vida.pack(fill=X)
 
         ttk.Label(frame, text="Experiencia (XP)").pack(pady=10)
         xp = ttk.Entry(frame)
+        xp.insert(0, self.personagem_atual.xp if self.personagem_atual else "")
         xp.pack(fill=X)
 
         ttk.Label(frame, text="Nível").pack(pady=10)
         nivel = ttk.Entry(frame)
+        nivel.insert(0, self.personagem_atual.nivel if self.personagem_atual else "")
         nivel.pack(fill=X)
 
         def salvar_personagem():
+            if self.personagem_atual:
+                self.personagem_atual.nome = nome.get()
+                self.personagem_atual.raca = raca.get()
+                self.personagem_atual.classe = classe.get()
+                self.personagem_atual.vida = int(vida.get())
+                self.personagem_atual.xp = int(xp.get())
+                self.personagem_atual.usuario = self.usuario
+                self.personagem_atual.nivel = int(nivel.get())
+                MesaController.atualizar_personagem(data['mesa'].uid, self.personagem_atual)
+                self.muda_pagina(MesasView)
+                window.destroy()
+                return
             personagem = Personagem(
                 uid=-1,
                 nome=nome.get(),
