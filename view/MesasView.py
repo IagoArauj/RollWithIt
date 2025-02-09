@@ -1,3 +1,5 @@
+from controller.PersonagemController import PersonagemController
+from controller.Strategies import PesquisaPorIdMestreStrategy, PesquisaPorIdJogadorStrategy
 from infra.config import data
 import ttkbootstrap as ttk
 from ttkbootstrap.constants import *
@@ -17,6 +19,7 @@ class MesasView(ttk.Frame):
         self.usuario = janela.curr_usuario
         self.pack(expand=True, fill=X, padx=40, pady=20, side=TOP)
         self.muda_pagina = muda_pagina
+        janela.geometry("800x600")
 
         header = ttk.Frame(self)
         header.pack(fill=X, side=TOP)
@@ -41,8 +44,8 @@ class MesasView(ttk.Frame):
 
         cols = ["UID", "Nome", "Descrição", "Ações"]
         cols_jogador = ["UID da Mesa", "Nome da Mesa", "Nome Personagem", "Ações"]
-
-        mesas_mestre = MesaController().get_mesas_mestre(janela.curr_usuario.uid)
+        mesa_controller_mestre = MesaController(PesquisaPorIdMestreStrategy())
+        mesas_mestre = mesa_controller_mestre.pesquisar_mesa(janela.curr_usuario.uid)
 
         if len(mesas_mestre) == 0:
             ttk.Label(self, text="Você não é mestre de nenhuma mesa").pack()
@@ -67,7 +70,8 @@ class MesasView(ttk.Frame):
 
         ttk.Label(self, text="Mesas que você é jogador", font=('Helvetica', 14)).pack(pady=10)
 
-        mesas_jogador = MesaController().get_mesas_jogador(janela.curr_usuario.uid)
+        mesa_controller_jogador = MesaController(PesquisaPorIdJogadorStrategy())
+        mesas_jogador = mesa_controller_jogador.pesquisar_mesa(janela.curr_usuario.uid)
 
         if len(mesas_jogador) == 0:
             ttk.Label(self, text="Você não é jogador de nenhuma mesa").pack()
@@ -90,7 +94,7 @@ class MesasView(ttk.Frame):
 
     def exclui_mesa(self, mesa):
         if tkMessageBox.askyesno("Excluir Mesa", "Deseja realmente excluir a mesa?"):
-            MesaController().remover(mesa.uid, self.usuario.uid)
+            MesaController.remover(mesa.uid, self.usuario.uid)
             self.muda_pagina(MesasView)
 
     def mostra_mesa(self, mesa, i, frame_mesas):
@@ -134,7 +138,7 @@ class MesasView(ttk.Frame):
 
     def remover_personagem(self, mesa, personagem):
         if tkMessageBox.askyesno("Remover Personagem", "Deseja realmente remover o personagem?"):
-            MesaController().remover_personagem(mesa.uid, personagem.uid, self.usuario.uid)
+            PersonagemController.remover_personagem(mesa.uid, personagem.uid, self.usuario.uid)
             self.muda_pagina(MesasView)
 
     def add_mesa_window(self):
@@ -159,7 +163,7 @@ class MesasView(ttk.Frame):
         ttk.Label(frame, text="").pack(pady=2)
 
         def add():
-            mesa = MesaController().cadastrar(nome_entry.get(), descricao_entry.get(), self.usuario)
+            mesa = MesaController.cadastrar(nome_entry.get(), descricao_entry.get(), self.usuario)
             if mesa is not None:
                 self.muda_pagina(MesasView)
                 window.destroy()
@@ -227,7 +231,7 @@ class MesasView(ttk.Frame):
                 self.personagem_atual.xp = int(xp.get())
                 self.personagem_atual.usuario = self.usuario
                 self.personagem_atual.nivel = int(nivel.get())
-                MesaController.atualizar_personagem(data['mesa'].uid, self.personagem_atual)
+                PersonagemController.atualizar_personagem(data['mesa'].uid, self.personagem_atual)
                 self.muda_pagina(MesasView)
                 window.destroy()
                 return
@@ -241,7 +245,7 @@ class MesasView(ttk.Frame):
                 usuario=self.usuario,
                 nivel=int(nivel.get())
             )
-            if not MesaController.adicionar_personagem(uid_mesa.get(), personagem):
+            if not PersonagemController.adicionar_personagem(uid_mesa.get(), personagem):
                 Messagebox.show_error("Erro ao adicionar personagem. Verifique se o UID da mesa é válido.")
 
             self.muda_pagina(MesasView)

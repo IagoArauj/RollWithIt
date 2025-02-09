@@ -61,8 +61,12 @@ class Database(metaclass=SingletonMeta):
     def add(self, obj, array_key):
         if array_key not in self.data:
             self.data[array_key] = []
-        self.data[array_key].append(obj)
-        self.dump_db()
+            obj.uid = 1
+        else:
+            self.data[array_key].sort(key=lambda x: x.uid)
+            obj.uid = self.data[array_key][-1].uid + 1
+            self.data[array_key].append(obj)
+            self.dump_db()
 
     def update(self, obj, array_key):
         if array_key not in self.data:

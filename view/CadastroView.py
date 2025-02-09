@@ -4,7 +4,6 @@ from ttkbootstrap.dialogs import Messagebox
 
 import view.LoginView
 from controller.UsuarioController import UsuarioController
-from view.MesasView import MesasView
 
 
 class CadastroView(ttk.Frame):
@@ -47,5 +46,5 @@ class CadastroView(ttk.Frame):
 
         ttk.Label(self).pack(pady=2)
 
-        ttk.Button(self, text="Voltar", style=PRIMARY, command=muda_pagina(view.LoginView.LoginView)).pack(fill=X)
+        ttk.Button(self, text="Voltar", style=PRIMARY, command=lambda: muda_pagina(view.LoginView.LoginView)).pack(fill=X)
         self.tkraise()

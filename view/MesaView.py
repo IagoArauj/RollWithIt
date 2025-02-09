@@ -1,14 +1,15 @@
 import ttkbootstrap as ttk
-from PIL.ImageOps import expand
 from ttkbootstrap.constants import *
 from tkinter import messagebox as Messagebox
 
+from DAO.MesaDao import MesaDao
+from DAO.UsuarioDao import UsuarioDao
 from Utils.ScrollableFrame import ScrollableFrame
-from controller.MesaController import MesaController
+from controller.MonstroController import MonstroController
+from controller.PersonagemController import PersonagemController
 from infra.config import data
 from model.Monstro import Monstro
 from model.Personagem import Personagem
-from model.Usuario import Usuario
 
 
 class MesaView(ttk.Frame):
@@ -20,7 +21,7 @@ class MesaView(ttk.Frame):
         self.usuario = janela.curr_usuario
         self.pack(expand=True, fill=X, padx=40, pady=20, side=TOP)
         self.muda_pagina = muda_pagina
-        data['app'].geometry("1400x700")
+        data['app'].geometry("1400x800")
 
         header = ttk.Frame(self)
         header.pack(fill=X, side=TOP)
@@ -194,7 +195,7 @@ class MesaView(ttk.Frame):
 
     def excluir_monstro(self, monstro: Monstro):
         if Messagebox.askyesno("Excluir monstro", f"Tem certeza que deseja excluir o monstro {monstro.nome}?"):
-            if MesaController.remover_monstro(data['mesa'].uid, monstro.uid, self.usuario.uid):
+            if MonstroController.remover(data['mesa'].uid, monstro.uid, self.usuario.uid):
                 self.muda_pagina(MesaView)
             else:
                 Messagebox.showerror("Erro", "Você não tem permissão para excluir")
@@ -244,13 +245,16 @@ class MesaView(ttk.Frame):
 
         ttk.Label(frame, text="Jogador").pack(pady=10)
         jogador = ttk.Combobox(frame)
-        jogador['values'] = [f'{usuario.nome}#{usuario.uid}' for usuario in Usuario.get_all()]
+
+        usuario_dao = UsuarioDao()
+
+        jogador['values'] = [f'{usuario.nome}#{usuario.uid}' for usuario in usuario_dao.get_all()]
         jogador.insert(0, insert_jogador if self.personagem_atual else "")
         jogador.pack(fill=X)
 
         def salvar_personagem():
             uid_selecionado = jogador.get().split('#')[-1]
-            usuario = Usuario.get_by_uid(int(uid_selecionado))
+            usuario = usuario_dao.get_by_uid(int(uid_selecionado))
 
             if self.personagem_atual:
                 self.personagem_atual.nome = nome.get()
@@ -260,7 +264,7 @@ class MesaView(ttk.Frame):
                 self.personagem_atual.xp = int(xp.get())
                 self.personagem_atual.usuario = usuario
                 self.personagem_atual.nivel = int(nivel.get())
-                MesaController.atualizar_personagem(data['mesa'].uid, self.personagem_atual)
+                PersonagemController.atualizar_personagem(data['mesa'].uid, self.personagem_atual)
                 self.muda_pagina(MesaView)
                 window.destroy()
                 self.personagem_atual = None
@@ -276,7 +280,7 @@ class MesaView(ttk.Frame):
                 usuario=usuario,
                 nivel=int(nivel.get())
             )
-            MesaController.adicionar_personagem(data['mesa'].uid, personagem)
+            PersonagemController.adicionar_personagem(data['mesa'].uid, personagem)
 
             self.muda_pagina(MesaView)
             window.destroy()
@@ -311,7 +315,7 @@ class MesaView(ttk.Frame):
                 self.monstro_atual.nome = nome.get()
                 self.monstro_atual.vida = int(vida.get())
                 self.monstro_atual.descricao = desc.get(1.0, 'end')
-                MesaController.atualizar_monstro(data['mesa'].uid, self.monstro_atual)
+                MonstroController.atualizar(data['mesa'].uid, self.monstro_atual)
                 self.muda_pagina(MesaView)
                 window.destroy()
                 self.monstro_atual = None
@@ -323,7 +327,7 @@ class MesaView(ttk.Frame):
                 vida=int(vida.get()),
                 descricao=desc.get(1.0, 'end')
             )
-            MesaController.adicionar_monstro(data['mesa'].uid, monstro)
+            MonstroController.adicionar(data['mesa'].uid, monstro)
 
             self.muda_pagina(MesaView)
             window.destroy()
@@ -332,7 +336,7 @@ class MesaView(ttk.Frame):
 
     def excluir_personagem(self, personagem: Personagem):
         if Messagebox.askyesno("Excluir jogador", f"Tem certeza que deseja excluir o jogador {personagem.nome}?"):
-            if MesaController.remover_personagem(data['mesa'].uid, personagem.uid, self.usuario.uid):
+            if PersonagemController.remover_personagem(data['mesa'].uid, personagem.uid, self.usuario.uid):
                 self.muda_pagina(MesaView)
             else:
                 Messagebox.showerror("Erro", "Você não tem permissão para excluir")
@@ -341,12 +345,14 @@ class MesaView(ttk.Frame):
     def salvar_mesa(self, nome, descricao):
         data['mesa'].nome = nome
         data['mesa'].descricao = descricao
-        data['mesa'].update()
+        mesa_dao = MesaDao()
+        mesa_dao.update(data['mesa'])
         self.muda_pagina(MesaView)
 
     def excluir_mesa(self):
         if not Messagebox.askyesno("Excluir mesa", f"Tem certeza que deseja excluir a mesa {data['mesa'].nome}?"):
             return
-        data['mesa'].delete()
+        mesa_dao = MesaDao()
+        mesa_dao.delete(data['mesa'])
         from view.MesasView import MesasView
         self.muda_pagina(MesasView)

@@ -22,6 +22,7 @@ class LoginView(ttk.Frame):
         super().__init__(janela)
         self.pack(expand=True, fill=X, padx=40, pady=20)
         self.muda_pagina = muda_pagina
+        janela.geometry("300x500")
 
         ttk.Label(self, text="Login", font=("Helvetica", 16)).pack(pady=20)
         ttk.Label(self, text="Usuário").pack()
