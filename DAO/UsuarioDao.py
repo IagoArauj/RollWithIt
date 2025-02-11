@@ -1,4 +1,4 @@
-from infra.db import SingletonMeta
+from Utils.SingletonMeta import SingletonMeta
 
 class UsuarioDao(metaclass=SingletonMeta):
 

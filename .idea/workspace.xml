@@ -4,24 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="62ee2235-6bd8-40e8-8240-3c64f9f3df06" name="Changes" comment="[FIX] mesas">
-      <change afterPath="$PROJECT_DIR$/DAO/MesaDao.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DAO/UsuarioDao.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DAO/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/controller/MonstroController.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/controller/PersonagemController.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/controller/Strategies.py" afterDir="false" />
+    <list default="true" id="62ee2235-6bd8-40e8-8240-3c64f9f3df06" name="Changes" comment="[MOD] alterações da entrega 3">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controller/MesaController.py" beforeDir="false" afterPath="$PROJECT_DIR$/controller/MesaController.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controller/UsuarioController.py" beforeDir="false" afterPath="$PROJECT_DIR$/controller/UsuarioController.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/infra/db.json" beforeDir="false" afterPath="$PROJECT_DIR$/infra/db.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/infra/db.py" beforeDir="false" afterPath="$PROJECT_DIR$/infra/db.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/Mesa.py" beforeDir="false" afterPath="$PROJECT_DIR$/model/Mesa.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/Usuario.py" beforeDir="false" afterPath="$PROJECT_DIR$/model/Usuario.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/view/CadastroView.py" beforeDir="false" afterPath="$PROJECT_DIR$/view/CadastroView.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/view/LoginView.py" beforeDir="false" afterPath="$PROJECT_DIR$/view/LoginView.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/view/MesaView.py" beforeDir="false" afterPath="$PROJECT_DIR$/view/MesaView.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/view/MesasView.py" beforeDir="false" afterPath="$PROJECT_DIR$/view/MesasView.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -140,7 +125,8 @@
       <workItem from="1738772790842" duration="6980000" />
       <workItem from="1739123693386" duration="11008000" />
       <workItem from="1739135669725" duration="100000" />
-      <workItem from="1739136011948" duration="1804000" />
+      <workItem from="1739136011948" duration="2211000" />
+      <workItem from="1739227913456" duration="2256000" />
     </task>
     <task id="LOCAL-00001" summary="[ADD] cadastro de mesas e usuarios">
       <option name="closed" value="true" />
@@ -174,7 +160,15 @@
       <option name="project" value="LOCAL" />
       <updated>1734408150334</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="[MOD] alterações da entrega 3">
+      <option name="closed" value="true" />
+      <created>1739137940126</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1739137940126</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -208,10 +202,11 @@
     <MESSAGE value="[MOD, ADD] página de mesa, adicionar jogador" />
     <MESSAGE value="[ADD] edição das entidades da mesa, adicionar personagem pelo menu principal" />
     <MESSAGE value="[FIX] mesas" />
-    <option name="LAST_COMMIT_MESSAGE" value="[FIX] mesas" />
+    <MESSAGE value="[MOD] alterações da entrega 3" />
+    <option name="LAST_COMMIT_MESSAGE" value="[MOD] alterações da entrega 3" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/RollWithIt$Programa.coverage" NAME="Programa Coverage Results" MODIFIED="1739137830946" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/RollWithIt$Programa.coverage" NAME="Programa Coverage Results" MODIFIED="1739227953993" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/RollWithIt$Login.coverage" NAME="Login Coverage Results" MODIFIED="1731118709178" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/view" />
   </component>
 </project>

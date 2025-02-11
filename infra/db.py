@@ -1,5 +1,6 @@
 import json
 
+from Utils.SingletonMeta import SingletonMeta
 from model.Usuario import Usuario
 from model.Personagem import Personagem
 from model.Monstro import Monstro
@@ -17,16 +18,6 @@ def encoder(obj):
             'mestre': obj.mestre.__dict__(),
             'monstros': [monstro.__dict__() for monstro in obj.monstros or []]
         }
-
-class SingletonMeta(type):
-    _instances = {}
-
-    def __call__(cls, *args, **kwargs):
-        if cls not in cls._instances:
-            instance = super().__call__(*args, **kwargs)
-            cls._instances[cls] = instance
-        return cls._instances[cls]
-
 
 class Database(metaclass=SingletonMeta):
     data = {}
